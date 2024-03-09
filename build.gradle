@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = "1.12.2-" + getVersion()
 group = 'Helix' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'EmbersifiedExtended'
 
@@ -97,7 +97,7 @@ String getVersion() {
 	String revision = "0";
 	String patch = "0";
 	String prefix = "public static final String VERSION = \"";
-	File file = file("src/main/java/p455w0rd/embersified/init/ModGlobals.java")
+	File file = file("src/main/java/embersified/init/ModGlobals.java")
 	file.eachLine { String s ->
 		s = s.trim();
 		if (s.startsWith(prefix)) {
@@ -117,7 +117,7 @@ jar {
         attributes([
             "Specification-Title": "EmbersifiedExtended",
             "Specification-Vendor": "EmbersifiedExtended",
-            "Specification-Version": "1", // We are version 1 of ourselves
+            "Specification-Version": getVersion(), // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"EmbersifiedExtended",

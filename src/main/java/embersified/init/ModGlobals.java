@@ -6,9 +6,9 @@ package embersified.init;
  */
 public class ModGlobals {
 
-	public static final String MODID = "embersifieded";
-	public static final String NAME = "Embersifieded";
-	public static final String VERSION = "1.0.4";
+	public static final String MODID = "embersifiedextended";
+	public static final String NAME = "EmbersifiedExtended";
+	public static final String VERSION = "1.0.0";
 	public static final String DEPENDENCIES = "required-after:embers@[1.8,);";
 	public static final String CONFIG_FILE = NAME + ".cfg";
 
