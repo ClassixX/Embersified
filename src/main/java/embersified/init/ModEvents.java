@@ -15,7 +15,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import embersified.blocks.tiles.TileEmitter;
+import embersified.blocks.tiles.TileEjector;
 import embersified.client.render.TESREmitter;
+import embersified.client.render.TESREjector;
 import teamroots.embers.RegistryManager;
 
 /**
@@ -44,6 +46,7 @@ public class ModEvents {
 	public static void onModelRegistryReady(ModelRegistryEvent event) {
 		ModBlocks.registerModels();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEmitter.class, new TESREmitter());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEjector.class, new TESREjector());
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
