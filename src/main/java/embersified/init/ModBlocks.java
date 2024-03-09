@@ -1,9 +1,8 @@
-package p455w0rd.embersified.init;
+package embersified.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import p455w0rd.embersified.blocks.BlockEmitter;
-import p455w0rd.embersified.blocks.BlockReceptor;
+import embersified.blocks.*;
 import teamroots.embers.block.IBlock;
 import teamroots.embers.block.IModeledBlock;
 
@@ -14,10 +13,12 @@ import teamroots.embers.block.IModeledBlock;
 public class ModBlocks {
 
 	public static final Block EMITTER = new BlockEmitter().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(0.6f);
-	public static final Block RECEPTOR = new BlockReceptor().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(0.6f);
+	public static final Block RECEPTOR = new BlockReceptor().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(0.6f);	
+	public static final Block EJECTOR = new BlockEjector().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(0.6f);
+	public static final Block FUNNEL = new BlockFunnel().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f);
 
 	private static final Block[] BLOCK_ARRAY = new Block[] {
-			EMITTER, RECEPTOR
+			EMITTER, RECEPTOR, EJECTOR, FUNNEL
 	};
 
 	public static final Block[] getArray() {

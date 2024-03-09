@@ -1,4 +1,4 @@
-package p455w0rd.embersified.blocks;
+package embersified.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import p455w0rd.embersified.blocks.tiles.TileReceptor;
+import embersified.blocks.tiles.TileReceptor;
 import teamroots.embers.block.BlockTEBase;
 
 /**

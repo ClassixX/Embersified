@@ -1,4 +1,4 @@
-package p455w0rd.embersified.blocks.tiles;
+package embersified.blocks.tiles;
 
 import java.util.Random;
 
@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import p455w0rd.embersified.blocks.BlockEmitter;
-import p455w0rd.embersified.init.ModConfig.Options;
+import embersified.blocks.BlockEmitter;
+import embersified.init.ModConfig.Options;
 import teamroots.embers.api.capabilities.EmbersCapabilities;
 import teamroots.embers.api.power.IEmberCapability;
 import teamroots.embers.api.power.IEmberPacketReceiver;
@@ -94,7 +94,7 @@ public class TileReceptor extends TileEntity implements ITileEntityBase, ITickab
 			//
 			if (attachedTile.hasCapability(EmbersCapabilities.EMBER_CAPABILITY, facing) && attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing) != null) {
 				IEmberCapability cap = attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing);
-				if (cap.getEmber() < cap.getEmberCapacity()) {
+				if (cap.getEmber() *2 <= cap.getEmberCapacity()) {
 					double added = cap.addAmount(Math.min(TRANSFER_RATE, embersCap.getEmber()), true);
 					embersCap.removeAmount(added, true);
 					if (!getWorld().isRemote) {
@@ -104,7 +104,7 @@ public class TileReceptor extends TileEntity implements ITileEntityBase, ITickab
 			}
 			else if (Options.embersEnergyCanGenerateForgeEnergy && attachedTile.hasCapability(CapabilityEnergy.ENERGY, facing) && attachedTile.getCapability(CapabilityEnergy.ENERGY, facing) != null) {
 				IEnergyStorage cap = attachedTile.getCapability(CapabilityEnergy.ENERGY, facing);
-				if (cap.canReceive() && cap.getEnergyStored() < cap.getMaxEnergyStored()) {
+				if (cap.canReceive() && cap.getEnergyStored()*2 <= cap.getMaxEnergyStored()) {
 					int added = cap.receiveEnergy((int) Math.min(TRANSFER_RATE * Options.mulitiplier, embersCap.getEmber() * Options.mulitiplier), true);
 					if (added > 0) {
 						cap.receiveEnergy((int) Math.min(TRANSFER_RATE * Options.mulitiplier, embersCap.getEmber() * Options.mulitiplier), false);

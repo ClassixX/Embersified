@@ -1,4 +1,4 @@
-package p455w0rd.embersified.blocks.tiles;
+package embersified.blocks.tiles;
 
 import java.util.Random;
 
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import p455w0rd.embersified.init.ModConfig.Options;
+import embersified.init.ModConfig.Options;
 import teamroots.embers.SoundManager;
 import teamroots.embers.api.capabilities.EmbersCapabilities;
 import teamroots.embers.api.power.IEmberCapability;
@@ -38,10 +38,10 @@ import teamroots.embers.util.Misc;
  * @author p455w0rd
  *
  */
-public class TileEmitter extends TileEntity implements ITileEntityBase, ITickable, IEmberPacketProducer {
+public class TileEjector extends TileEntity implements ITileEntityBase, ITickable, IEmberPacketProducer {
 
-	public static final double TRANSFER_RATE = 40.0;
-	public static final double PULL_RATE = 10.0;
+	public static final double TRANSFER_RATE = 400.0;
+	public static final double PULL_RATE = 100.0;
 	public IEmberCapability embersCap = new DefaultEmberCapability();
 	public IEnergyStorage forgeCap;
 	public BlockPos target = null;
@@ -67,9 +67,9 @@ public class TileEmitter extends TileEntity implements ITileEntityBase, ITickabl
 		return EnumConnection.NONE;
 	}
 
-	public TileEmitter() {
-		embersCap.setEmberCapacity(200.0);
-		forgeCap = new EnergySettable(this);
+	public TileEjector() {
+		embersCap.setEmberCapacity(2000.0);
+		forgeCap = new EnergySettable2(this);
 	}
 
 	public void updateNeighbors(IBlockAccess world) {
@@ -158,10 +158,10 @@ public class TileEmitter extends TileEntity implements ITileEntityBase, ITickabl
 		IBlockState state = getWorld().getBlockState(getPos());
 		EnumFacing facing = state.getValue(BlockEmberPulser.facing);
 		TileEntity attachedTile = getWorld().getTileEntity(getPos().offset(facing.getOpposite()));
-		if (ticksExisted % 5 == 0 && attachedTile != null && embersCap.getEmber() < embersCap.getEmberCapacity()) {
+		if (ticksExisted % 5 == 0 && attachedTile != null && (embersCap.getEmber()+PULL_RATE) < embersCap.getEmberCapacity()) {
 			if (attachedTile.hasCapability(EmbersCapabilities.EMBER_CAPABILITY, facing)) {
 				if (attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing).getEmber() > 0.0) {
-					double removed = attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing).removeAmount(10.0, true);
+					double removed = attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing).removeAmount(PULL_RATE, true);
 					embersCap.addAmount(removed, true);
 					if (!getWorld().isRemote) {
 						attachedTile.markDirty();
@@ -172,8 +172,8 @@ public class TileEmitter extends TileEntity implements ITileEntityBase, ITickabl
 		if ((ticksExisted + offset) % 20 == 0 && getWorld().isBlockIndirectlyGettingPowered(getPos()) != 0 && target != null && !getWorld().isRemote && embersCap.getEmber() > PULL_RATE && (targetTile = getWorld().getTileEntity(target)) instanceof IEmberPacketReceiver && !((IEmberPacketReceiver) targetTile).isFull()) {
 			EntityEmberPacket packet = new EntityEmberPacket(getWorld());
 			Vec3d velocity = getBurstVelocity(facing);
-			packet.initCustom(getPos(), target, velocity.x, velocity.y, velocity.z, Math.min(40.0, embersCap.getEmber()));
-			embersCap.removeAmount(Math.min(40.0, embersCap.getEmber()), true);
+			packet.initCustom(getPos(), target, velocity.x, velocity.y, velocity.z, Math.min(TRANSFER_RATE, embersCap.getEmber()));
+			embersCap.removeAmount(Math.min(TRANSFER_RATE, embersCap.getEmber()), true);
 			getWorld().spawnEntity(packet);
 			getWorld().playSound(null, pos, SoundManager.EMBER_EMIT, SoundCategory.BLOCKS, 1.0f, 1.0f);
 		}
@@ -232,12 +232,12 @@ public class TileEmitter extends TileEntity implements ITileEntityBase, ITickabl
 		return embersCap;
 	}
 
-	public static class EnergySettable implements IEnergyStorage {
+	public static class EnergySettable2 implements IEnergyStorage {
 
 		private final IEmberCapability embersCap;
-		private final TileEmitter tile;
+		private final TileEjector tile;
 
-		public EnergySettable(@Nonnull TileEmitter tile) {
+		public EnergySettable2(@Nonnull TileEjector tile) {
 			embersCap = tile.getEmbersCap();
 			this.tile = tile;
 		}

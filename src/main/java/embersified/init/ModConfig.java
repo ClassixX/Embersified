@@ -1,4 +1,4 @@
-package p455w0rd.embersified.init;
+package embersified.init;
 
 import java.io.File;
 

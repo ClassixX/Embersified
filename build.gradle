@@ -1,29 +1,58 @@
 buildscript {
     repositories {
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
+        maven { url = 'https://maven.minecraftforge.net/' }
+        mavenCentral()
     }
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
     }
 }
+        
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 
-apply plugin: "net.minecraftforge.gradle.forge"
+version = '1.0'
+group = 'Helix' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'EmbersifiedExtended'
 
-version = "1.12.2-" + getVersion()
-group = "p455w0rd"
-archivesBaseName = "Embersified"
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    version = "1.12.2-14.23.4.2760"
-    runDir = "run"
-    mappings = "snapshot_20171003"
-	useDepAts = true
+    // The mappings can be changed at any time, and must be in the following format.
+    // snapshot_YYYYMMDD   Snapshot are built nightly.
+    // stable_#            Stables are built at the discretion of the MCP team.
+    // Use non-default mappings at your own risk. they may not always work.
+    // Simply re-run your setup task after changing the mappings to update your workspace.
+    //mappings channel: 'snapshot', version: '20171003-1.12'
+    mappings channel: 'snapshot', version: '20171003-1.12'
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    // Default run configurations.
+    // These can be tweaked, removed, or duplicated as needed.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+
+        server {
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+    }
 }
 
 repositories {
@@ -43,33 +72,25 @@ repositories {
         name = "CoFH"
         url = "http://maven.covers1624.net"
     }
+	maven {
+        url "https://cursemaven.com"
+    }
 }
 
 dependencies {
-	deobfCompile "mezz.jei:jei_1.12.2:+"
-	deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.23-16"
-	deobfCompile "codechicken:CodeChickenLib:1.12.2-3.2.1.351:universal"
-	deobfCompile "cofh:RedstoneFlux:1.12-2.0.2.4:universal"
-	deobfCompile "cofh:ThermalDynamics:1.12.2-2+:universal"
-	deobfCompile "cofh:ThermalFoundation:1.12.2-2+:universal"
-	deobfCompile "cofh:ThermalExpansion:1.12.2-5+:universal"
-	deobfCompile "cofh:CoFHCore:1.12.2-4+:universal"
-	deobfCompile "cofh:CoFHWorld:1.12.2-1+:universal"
+	minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+	fg.deobf("mezz.jei:jei_1.12.2:+")
+	fg.deobf("mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.23-16")
+	fg.deobf("codechicken:CodeChickenLib:1.12.2-3.2.1.351:universal")
+	fg.deobf("cofh:RedstoneFlux:1.12-2.0.2.4:universal")
+	fg.deobf("cofh:ThermalDynamics:1.12.2-2+:universal")
+	fg.deobf("cofh:ThermalFoundation:1.12.2-2+:universal")
+	fg.deobf("cofh:ThermalExpansion:1.12.2-5+:universal")
+	fg.deobf("cofh:CoFHCore:1.12.2-4+:universal")
+	fg.deobf("cofh:CoFHWorld:1.12.2-1+:universal")
+	implementation fg.deobf("curse.maven:embers-rekindled-300777:3695248")
 }
 
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from (sourceSets.main.resources.srcDirs) {
-        include "mcmod.info"
-        expand "version": project.version, "mcversion": project.minecraft.version
-    }
-        
-    from (sourceSets.main.resources.srcDirs) {
-        exclude "mcmod.info"
-    }
-}
 
 String getVersion() {
 	String major = "0";
@@ -89,4 +110,37 @@ String getVersion() {
 		}
 	}
 	return "$major.$revision.$patch";
+}
+// Example for how to get properties into the manifest for reading by the runtime..
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "EmbersifiedExtended",
+            "Specification-Vendor": "EmbersifiedExtended",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"EmbersifiedExtended",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+// Example configuration to allow publishing using the maven-publish task
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('reobfJar') 
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+//publish.dependsOn('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package p455w0rd.embersified.client.render;
+package embersified.client.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -7,8 +7,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import p455w0rd.embersified.blocks.tiles.TileEmitter;
-import p455w0rd.embersified.init.ModIntegration.Mod;
+import embersified.blocks.tiles.TileEmitter;
+import embersified.init.ModIntegration.Mod;
 import teamroots.embers.util.RenderUtil;
 import teamroots.embers.util.StructBox;
 import teamroots.embers.util.StructUV;

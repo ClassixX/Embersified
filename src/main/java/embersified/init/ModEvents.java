@@ -1,4 +1,4 @@
-package p455w0rd.embersified.init;
+package embersified.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import p455w0rd.embersified.blocks.tiles.TileEmitter;
-import p455w0rd.embersified.client.render.TESREmitter;
+import embersified.blocks.tiles.TileEmitter;
+import embersified.client.render.TESREmitter;
 import teamroots.embers.RegistryManager;
 
 /**
@@ -30,6 +30,8 @@ public class ModEvents {
 		event.getRegistry().registerAll(ModBlocks.getArray());
 		RegistryManager.ember_emitter = ModBlocks.EMITTER;
 		RegistryManager.ember_receiver = ModBlocks.RECEPTOR;
+		RegistryManager.ember_pulser = ModBlocks.EJECTOR;
+		RegistryManager.ember_funnel = ModBlocks.FUNNEL;
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
