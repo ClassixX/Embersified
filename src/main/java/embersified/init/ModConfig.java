@@ -26,6 +26,8 @@ public class ModConfig {
 		//Options.embersEnergyCanGenerateAE2Energy = CONFIG.get(Configuration.CATEGORY_GENERAL, "Embers Can Produce AE2", true, "Embers energy generating blocks can produce AE2 Energy").getBoolean();
 		//Options.rfEnergyCanGenerateEmbers = CONFIG.get(Configuration.CATEGORY_GENERAL, "RF Can Produce Embers", false, "RF energy generating blocks can produce Embers energy").getBoolean();
 		//Options.embersEnergyCanGenerateRFEnergy = CONFIG.get(Configuration.CATEGORY_GENERAL, "Embers Can Produce RF", true, "Embers energy generating blocks can produce RF Energy").getBoolean();
+		Options.chargerCanGenerateForge = CONFIG.get(Configuration.CATEGORY_GENERAL, "Charger can charge FE", true, "The Copper Charger can charge items with FE using Embers energy, requires Embers Can Produce FE").getBoolean();
+		Options.chargerCanGenerateEmbersFromForge = CONFIG.get(Configuration.CATEGORY_GENERAL,"Charger can discharge FE",false,"The Copper Charger can drain FE from items to produce Embers energy, requires FE Can Produce Embers").getBoolean();
 		if (CONFIG.hasChanged()) {
 			CONFIG.save();
 		}
@@ -40,6 +42,8 @@ public class ModConfig {
 		public static boolean embersEnergyCanGenerateAE2Energy = true;
 		public static boolean rfEnergyCanGenerateEmbers = false;
 		public static boolean embersEnergyCanGenerateRFEnergy = true;
+		public static boolean chargerCanGenerateForge =true;
+		public static boolean chargerCanGenerateEmbersFromForge=false;
 
 	}
 

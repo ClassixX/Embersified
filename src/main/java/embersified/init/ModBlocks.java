@@ -16,9 +16,10 @@ public class ModBlocks {
 	public static final Block RECEPTOR = new BlockReceptor().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(0.6f);	
 	public static final Block EJECTOR = new BlockEjector().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(0.6f);
 	public static final Block FUNNEL = new BlockFunnel().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f);
+	public static final Block CHARGER = new BlockChargerE().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f);
 
 	private static final Block[] BLOCK_ARRAY = new Block[] {
-			EMITTER, RECEPTOR, EJECTOR, FUNNEL
+			EMITTER, RECEPTOR, EJECTOR, FUNNEL, CHARGER
 	};
 
 	public static final Block[] getArray() {

@@ -10,6 +10,7 @@ import embersified.blocks.tiles.TileEmitter;
 import embersified.blocks.tiles.TileReceptor;
 import embersified.blocks.tiles.TileEjector;
 import embersified.blocks.tiles.TileFunnel;
+import embersified.blocks.tiles.TileCharger;
 import embersified.init.ModConfig;
 import embersified.init.ModGlobals;
 
@@ -26,6 +27,7 @@ public class Embersified {
 		GameRegistry.registerTileEntity(TileReceptor.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_receiver"));
 		GameRegistry.registerTileEntity(TileEjector.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_pulser"));
 		GameRegistry.registerTileEntity(TileFunnel.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_funnel"));
+		GameRegistry.registerTileEntity(TileCharger.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_charger"));
 	}
 
 }

@@ -16,8 +16,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import embersified.blocks.tiles.TileEmitter;
 import embersified.blocks.tiles.TileEjector;
+import embersified.blocks.tiles.TileCharger;
 import embersified.client.render.TESREmitter;
 import embersified.client.render.TESREjector;
+import embersified.client.render.TESRCharger;
 import teamroots.embers.RegistryManager;
 
 /**
@@ -36,6 +38,7 @@ public class ModEvents {
 		RegistryManager.ember_receiver = ModBlocks.RECEPTOR;
 		RegistryManager.ember_pulser = ModBlocks.EJECTOR;
 		RegistryManager.ember_funnel = ModBlocks.FUNNEL;
+		RegistryManager.charger = ModBlocks.CHARGER;
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
@@ -49,6 +52,7 @@ public class ModEvents {
 		ModBlocks.registerModels();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEmitter.class, new TESREmitter());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEjector.class, new TESREjector());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileCharger.class, new TESRCharger());
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
@@ -84,6 +88,15 @@ public class ModEvents {
 				'E', RegistryManager.ember_emitter,
 				'I', "ingotIron",
 				'D', "plateDawnstone"}).setRegistryName(getRL("ember_pulser")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("charger"),new ItemStack(RegistryManager.charger,1),true,new Object[]{
+				" X ",
+				"DCD",
+				"IPI",
+				'D', "ingotDawnstone",
+				'P', "plateCopper",
+				'C', "ingotCopper",
+				'I', "ingotIron",
+				'X', "plateIron"}).setRegistryName(getRL("charger")));
 		//@formatter:on
 	}
 
