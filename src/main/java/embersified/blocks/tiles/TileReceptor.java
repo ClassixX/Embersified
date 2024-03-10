@@ -94,7 +94,7 @@ public class TileReceptor extends TileEntity implements ITileEntityBase, ITickab
 			//
 			if (attachedTile.hasCapability(EmbersCapabilities.EMBER_CAPABILITY, facing) && attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing) != null) {
 				IEmberCapability cap = attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing);
-				if (cap.getEmber() *2 <= cap.getEmberCapacity()) {
+				if (cap.getEmber() < cap.getEmberCapacity()) {
 					double added = cap.addAmount(Math.min(TRANSFER_RATE, embersCap.getEmber()), true);
 					embersCap.removeAmount(added, true);
 					if (!getWorld().isRemote) {
@@ -104,7 +104,7 @@ public class TileReceptor extends TileEntity implements ITileEntityBase, ITickab
 			}
 			else if (Options.embersEnergyCanGenerateForgeEnergy && attachedTile.hasCapability(CapabilityEnergy.ENERGY, facing) && attachedTile.getCapability(CapabilityEnergy.ENERGY, facing) != null) {
 				IEnergyStorage cap = attachedTile.getCapability(CapabilityEnergy.ENERGY, facing);
-				if (cap.canReceive() && cap.getEnergyStored()*2 <= cap.getMaxEnergyStored()) {
+				if (cap.canReceive() && cap.getEnergyStored() < cap.getMaxEnergyStored()) {
 					int added = cap.receiveEnergy((int) Math.min(TRANSFER_RATE * Options.mulitiplier, embersCap.getEmber() * Options.mulitiplier), true);
 					if (added > 0) {
 						cap.receiveEnergy((int) Math.min(TRANSFER_RATE * Options.mulitiplier, embersCap.getEmber() * Options.mulitiplier), false);

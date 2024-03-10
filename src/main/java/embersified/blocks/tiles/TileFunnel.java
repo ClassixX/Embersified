@@ -94,7 +94,7 @@ public class TileFunnel extends TileEntity implements ITileEntityBase, ITickable
 			//
 			if (attachedTile.hasCapability(EmbersCapabilities.EMBER_CAPABILITY, facing) && attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing) != null) {
 				IEmberCapability cap = attachedTile.getCapability(EmbersCapabilities.EMBER_CAPABILITY, facing);
-				if (cap.getEmber() <= cap.getEmberCapacity()) {
+				if (cap.getEmber() < cap.getEmberCapacity()) {
 					double added = cap.addAmount(Math.min(TRANSFER_RATE, embersCap.getEmber()), true);
 					embersCap.removeAmount(added, true);
 					if (!getWorld().isRemote) {
