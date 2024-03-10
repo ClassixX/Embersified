@@ -7,9 +7,9 @@
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["p455w0rd aka TheRealp455w0rd" "HelixPHD],
+  "authorList": ["HelixPHD"],
   "credits": "p455w0rd",
-  "logoFile": "",
+  "logoFile": "Logo.png",
   "screenshots": [],
   "dependencies": []
 }
