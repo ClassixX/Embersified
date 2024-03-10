@@ -26,7 +26,9 @@ import teamroots.embers.RegistryManager;
  */
 @EventBusSubscriber(modid = ModGlobals.MODID)
 public class ModEvents {
-
+	public static ResourceLocation getRL(String s){
+    	return new ResourceLocation("embers",s);
+    }
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void onBlockRegistryReady(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(ModBlocks.getArray());
@@ -52,13 +54,36 @@ public class ModEvents {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onRecipeRegistryReady(RegistryEvent.Register<IRecipe> event) {
 		//@formatter:off
-		event.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("embers", "ember_receiver"), new ItemStack(ModBlocks.RECEPTOR, 4),
-				"I I", "CPC", 'I', "ingotIron", 'C', "ingotCopper", 'P', RegistryManager.plate_caminite
-				).setRegistryName(new ResourceLocation("embers", "ember_receiver")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("ember_receiver"), new ItemStack(ModBlocks.RECEPTOR, 4),
+				"I I",
+				"CPC",
+				'I', "ingotIron",
+				'C', "ingotCopper",
+				'P', RegistryManager.plate_caminite
+				).setRegistryName(getRL("ember_receiver")));
 
-		event.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("embers", "ember_emitter"), new ItemStack(Item.getItemFromBlock(ModBlocks.EMITTER), 3),
-						" a ", " a ", "bcb", 'b', "ingotIron", 'a', "ingotCopper", 'c', RegistryManager.plate_caminite
-						).setRegistryName(new ResourceLocation("embers", "ember_emitter")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("ember_emitter"), new ItemStack(Item.getItemFromBlock(ModBlocks.EMITTER), 3),
+						" a ", 
+						" a ", 
+						"bcb",
+						'b', "ingotIron",
+						'a', "ingotCopper",
+						'c', RegistryManager.plate_caminite
+						).setRegistryName(getRL("ember_emitter")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("ember_funnel"),new ItemStack(RegistryManager.ember_funnel,1),true,new Object[]{
+				"D D",
+				"CRC",
+				" D ",
+				'R', RegistryManager.ember_receiver,
+				'C', "ingotCopper",
+				'D', "plateDawnstone"}).setRegistryName(getRL("ember_funnel")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("ember_pulser"),new ItemStack(RegistryManager.ember_pulser,1),true,new Object[]{
+				"D",
+				"E",
+				"I",
+				'E', RegistryManager.ember_emitter,
+				'I', "ingotIron",
+				'D', "plateDawnstone"}).setRegistryName(getRL("ember_pulser")));
 		//@formatter:on
 	}
 
