@@ -136,7 +136,7 @@ public class TileFunnel extends TileEntity implements ITileEntityBase, ITickable
 
 	@Override
 	public boolean isFull() {
-		return embersCap.getEmber() >= embersCap.getEmberCapacity();
+		return embersCap.getEmber() >= (embersCap.getEmberCapacity()-TRANSFER_RATE*4);
 	}
 
 	@Override

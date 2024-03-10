@@ -136,7 +136,7 @@ public class TileReceptor extends TileEntity implements ITileEntityBase, ITickab
 
 	@Override
 	public boolean isFull() {
-		return embersCap.getEmber() >= embersCap.getEmberCapacity();
+		return embersCap.getEmber() >= (embersCap.getEmberCapacity()-TRANSFER_RATE*4);
 	}
 
 	@Override
