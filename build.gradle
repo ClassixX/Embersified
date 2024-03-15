@@ -75,22 +75,27 @@ repositories {
 	maven {
         url "https://cursemaven.com"
     }
+	    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
 }
 
 dependencies {
 	minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-	fg.deobf("mezz.jei:jei_1.12.2:+")
-	fg.deobf("mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.23-16")
-	fg.deobf("codechicken:CodeChickenLib:1.12.2-3.2.1.351:universal")
-	fg.deobf("cofh:RedstoneFlux:1.12-2.0.2.4:universal")
-	fg.deobf("cofh:ThermalDynamics:1.12.2-2+:universal")
-	fg.deobf("cofh:ThermalFoundation:1.12.2-2+:universal")
-	fg.deobf("cofh:ThermalExpansion:1.12.2-5+:universal")
-	fg.deobf("cofh:CoFHCore:1.12.2-4+:universal")
-	fg.deobf("cofh:CoFHWorld:1.12.2-1+:universal")
+	//runtimeOnly fg.deobf("curse.maven:jei-238222:5101347")
+//	fg.deobf("mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.23-16")
+//	fg.deobf("codechicken:CodeChickenLib:1.12.2-3.2.1.351:universal")
+//	fg.deobf("cofh:RedstoneFlux:1.12-2.0.2.4:universal")
+//	fg.deobf("cofh:ThermalDynamics:1.12.2-2+:universal")
+//	fg.deobf("cofh:ThermalFoundation:1.12.2-2+:universal")
+//	fg.deobf("cofh:ThermalExpansion:1.12.2-5+:universal")
+//	fg.deobf("cofh:CoFHCore:1.12.2-4+:universal")
+//	fg.deobf("cofh:CoFHWorld:1.12.2-1+:universal")
 	implementation fg.deobf("curse.maven:embers-rekindled-300777:3695248")
+	implementation fg.deobf("curse.maven:botania-225643:3330934")
+	runtimeOnly 'baubles:Baubles:1.12:1.5.2'
 }
-
 
 String getVersion() {
 	String major = "0";
@@ -112,19 +117,19 @@ String getVersion() {
 	return "$major.$revision.$patch";
 }
 // Example for how to get properties into the manifest for reading by the runtime..
-jar {
-    manifest {
-        attributes([
-            "Specification-Title": "EmbersifiedExtended",
-            "Specification-Vendor": "EmbersifiedExtended",
-            "Specification-Version": getVersion(), // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"EmbersifiedExtended",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
+//jar {
+//    manifest {
+//        attributes([
+//            "Specification-Title": "EmbersifiedExtended",
+//            "Specification-Vendor": "EmbersifiedExtended",
+//            "Specification-Version": getVersion(), // We are version 1 of ourselves
+//            "Implementation-Title": project.name,
+//            "Implementation-Version": "${version}",
+//            "Implementation-Vendor" :"EmbersifiedExtended",
+//            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+//        ])
+//    }
+//}
 
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file

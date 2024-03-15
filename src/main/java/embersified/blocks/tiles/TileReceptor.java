@@ -27,6 +27,9 @@ import teamroots.embers.entity.EntityEmberPacket;
 import teamroots.embers.power.DefaultEmberCapability;
 import teamroots.embers.tileentity.ITileEntityBase;
 import teamroots.embers.util.Misc;
+import vazkii.botania.api.mana.IManaPool;
+import vazkii.botania.api.state.BotaniaStateProps;
+import vazkii.botania.api.state.enums.PoolVariant;
 
 /**
  * @author p455w0rd
@@ -35,6 +38,8 @@ import teamroots.embers.util.Misc;
 public class TileReceptor extends TileEntity implements ITileEntityBase, ITickable, IEmberPacketReceiver {
 
 	public static final int TRANSFER_RATE = 10;
+	public static final int MAX_MANA = 1000000;
+	private static final int MAX_MANA_DILLUTED = 10000; 
 	public IEmberCapability embersCap = new DefaultEmberCapability();
 	Random random = new Random();
 	long ticksExisted = 0;
@@ -110,6 +115,18 @@ public class TileReceptor extends TileEntity implements ITileEntityBase, ITickab
 						cap.receiveEnergy((int) Math.min(TRANSFER_RATE * Options.mulitiplier, embersCap.getEmber() * Options.mulitiplier), false);
 						embersCap.removeAmount(added / Options.mulitiplier, true);
 					}
+					if (!getWorld().isRemote) {
+						attachedTile.markDirty();
+					}
+				}
+			}
+			else if(attachedTile instanceof IManaPool && Options.embersCanGenerateMana) {
+				IManaPool pool = (IManaPool) attachedTile;
+				if(!pool.isFull()) {
+					int manaCap = world.getBlockState(attachedTile.getPos()).getValue(BotaniaStateProps.POOL_VARIANT) == PoolVariant.DILUTED ? MAX_MANA_DILLUTED : MAX_MANA;
+					double ToAdd = Math.min(TRANSFER_RATE * Options.manaMultiplier, manaCap - pool.getCurrentMana());
+					pool.recieveMana((int)ToAdd);
+					embersCap.removeAmount(ToAdd / Options.manaMultiplier, true);
 					if (!getWorld().isRemote) {
 						attachedTile.markDirty();
 					}

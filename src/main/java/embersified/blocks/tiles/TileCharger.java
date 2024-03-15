@@ -186,7 +186,7 @@ public class TileCharger extends TileEntityCharger{
 					emberAdded = capability.addAmount(Math.min(Math.abs(transferRate), itemCapability.getEmber()), !world.isRemote);
 					itemCapability.removeAmount(emberAdded, !world.isRemote);
 					}
-					if(itemEnergyCap!=null && Options.forgeEnergyCanGenerateEmbers && Options.chargerCanGenerateEmbersFromForge) {
+					if(itemEnergyCap!=null && Options.forgeEnergyCanGenerateEmbers && Options.chargerCanGenerateForge) {
 						itemFEInEmber = ((double)itemEnergyCap.getEnergyStored()) / Options.mulitiplier;
 						energyAdded = capability.addAmount(Math.min(Math.abs(transferRate), itemFEInEmber), !world.isRemote);
 						itemEnergyCap.extractEnergy((int)Math.ceil((energyAdded*Options.mulitiplier/2)), false);		//rounding errors cause some problems, I'll ignore that for now lol

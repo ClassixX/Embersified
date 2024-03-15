@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import embersified.blocks.tiles.TileEmitter;
 import embersified.blocks.tiles.TileReceptor;
+import embersified.blocks.tiles.TileVPipe;
 import embersified.blocks.tiles.TileEjector;
 import embersified.blocks.tiles.TileFunnel;
 import embersified.blocks.tiles.TileCharger;
@@ -28,6 +29,7 @@ public class Embersified {
 		GameRegistry.registerTileEntity(TileEjector.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_pulser"));
 		GameRegistry.registerTileEntity(TileFunnel.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_funnel"));
 		GameRegistry.registerTileEntity(TileCharger.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_charger"));
+		GameRegistry.registerTileEntity(TileVPipe.class, new ResourceLocation(ModGlobals.MODID, "tile_entity_ember_pipe"));
 	}
 
 }

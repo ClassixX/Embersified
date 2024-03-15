@@ -19,15 +19,17 @@ public class ModConfig {
 
 	public void load() {
 		CONFIG.load();
-		Options.mulitiplier = CONFIG.get(Configuration.CATEGORY_GENERAL, "Embers Multiplier", 100D, "Forge Energy amount equals default Ember amount (10) times this number", 100D, Double.MAX_VALUE).getDouble();
+		Options.mulitiplier = CONFIG.get(Configuration.CATEGORY_GENERAL, "Forge Multiplier", 100D, "Forge Energy amount equals Ember amount times this number", 1D, Double.MAX_VALUE).getDouble();
 		Options.forgeEnergyCanGenerateEmbers = CONFIG.get(Configuration.CATEGORY_GENERAL, "FE Can Produce Embers", false, "FE generating blocks can produce Embers energy").getBoolean();
 		Options.embersEnergyCanGenerateForgeEnergy = CONFIG.get(Configuration.CATEGORY_GENERAL, "Embers Can Produce FE", true, "Embers energy generating blocks can produce Forge Energy").getBoolean();
 		//Options.ae2EnergyCanGenerateEmbers = CONFIG.get(Configuration.CATEGORY_GENERAL, "AE2 Can Produce Embers", false, "AE2 energy generating blocks can produce Embers energy").getBoolean();
 		//Options.embersEnergyCanGenerateAE2Energy = CONFIG.get(Configuration.CATEGORY_GENERAL, "Embers Can Produce AE2", true, "Embers energy generating blocks can produce AE2 Energy").getBoolean();
 		//Options.rfEnergyCanGenerateEmbers = CONFIG.get(Configuration.CATEGORY_GENERAL, "RF Can Produce Embers", false, "RF energy generating blocks can produce Embers energy").getBoolean();
 		//Options.embersEnergyCanGenerateRFEnergy = CONFIG.get(Configuration.CATEGORY_GENERAL, "Embers Can Produce RF", true, "Embers energy generating blocks can produce RF Energy").getBoolean();
-		Options.chargerCanGenerateForge = CONFIG.get(Configuration.CATEGORY_GENERAL, "Charger can charge FE", true, "The Copper Charger can charge items with FE using Embers energy, requires Embers Can Produce FE").getBoolean();
-		Options.chargerCanGenerateEmbersFromForge = CONFIG.get(Configuration.CATEGORY_GENERAL,"Charger can discharge FE",false,"The Copper Charger can drain FE from items to produce Embers energy, requires FE Can Produce Embers").getBoolean();
+		Options.chargerCanGenerateForge = CONFIG.get(Configuration.CATEGORY_GENERAL, "Charger can charge FE", true, "Adds embersified functionality to the Copper Charger").getBoolean();
+		Options.pipesCanGenerateForge = CONFIG.getBoolean(Configuration.CATEGORY_GENERAL, "Conduits can generate FE", true, "Adds embersified functionality to the Volatile Ember Conduit");
+		Options.embersCanGenerateMana = CONFIG.getBoolean(Configuration.CATEGORY_GENERAL, "Embers can produce Mana", true, "Embers energy generating blocks can produce Botania Mana");
+		Options.manaMultiplier = CONFIG.get(Configuration.CATEGORY_GENERAL, "Mana Multiplier", 10D, "Mana produced equals Ember amount times this number", 1D, Double.MAX_VALUE).getDouble();
 		if (CONFIG.hasChanged()) {
 			CONFIG.save();
 		}
@@ -43,7 +45,9 @@ public class ModConfig {
 		public static boolean rfEnergyCanGenerateEmbers = false;
 		public static boolean embersEnergyCanGenerateRFEnergy = true;
 		public static boolean chargerCanGenerateForge =true;
-		public static boolean chargerCanGenerateEmbersFromForge=false;
+		public static boolean pipesCanGenerateForge =true;
+		public static double manaMultiplier = 10D;
+		public static boolean embersCanGenerateMana = true;
 
 	}
 

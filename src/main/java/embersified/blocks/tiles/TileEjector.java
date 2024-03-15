@@ -169,7 +169,7 @@ public class TileEjector extends TileEntity implements ITileEntityBase, ITickabl
 				}
 			}
 		}
-		if ((ticksExisted + offset) % 20 == 0 && getWorld().isBlockIndirectlyGettingPowered(getPos()) != 0 && target != null && !getWorld().isRemote && embersCap.getEmber() > PULL_RATE && (targetTile = getWorld().getTileEntity(target)) instanceof IEmberPacketReceiver && !((IEmberPacketReceiver) targetTile).isFull()) {
+		if ((ticksExisted + offset) % 20 == 0 && getWorld().isBlockIndirectlyGettingPowered(getPos()) != 0 && target != null && !getWorld().isRemote && embersCap.getEmber() > PULL_RATE && (targetTile = getWorld().getTileEntity(target)) instanceof IEmberPacketReceiver && !((IEmberPacketReceiver)targetTile).isFull()) {
 			EntityEmberPacket packet = new EntityEmberPacket(getWorld());
 			Vec3d velocity = getBurstVelocity(facing);
 			packet.initCustom(getPos(), target, velocity.x, velocity.y, velocity.z, Math.min(TRANSFER_RATE, embersCap.getEmber()));

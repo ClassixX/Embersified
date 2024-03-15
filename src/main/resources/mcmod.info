@@ -3,13 +3,13 @@
   "modid": "embersified",
   "name": "EmbersifiedExtended",
   "description": "Allows FE capable tileentities and items to also support Embers (the power system)",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "1.1.0",
+  "mcversion": "1.12.2",
+  "logoFile": "Logo.png",
   "url": "",
   "updateUrl": "",
   "authorList": ["HelixPHD"],
   "credits": "p455w0rd",
-  "logoFile": "Logo.png",
   "screenshots": [],
   "dependencies": []
 }

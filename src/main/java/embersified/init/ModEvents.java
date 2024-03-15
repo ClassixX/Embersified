@@ -17,11 +17,12 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import embersified.blocks.tiles.TileEmitter;
 import embersified.blocks.tiles.TileEjector;
 import embersified.blocks.tiles.TileCharger;
+import embersified.blocks.tiles.TileVPipe;
 import embersified.client.render.TESREmitter;
 import embersified.client.render.TESREjector;
 import embersified.client.render.TESRCharger;
+import embersified.client.render.TESRVPipe;
 import teamroots.embers.RegistryManager;
-
 /**
  * @author p455w0rd
  *
@@ -39,6 +40,7 @@ public class ModEvents {
 		RegistryManager.ember_pulser = ModBlocks.EJECTOR;
 		RegistryManager.ember_funnel = ModBlocks.FUNNEL;
 		RegistryManager.charger = ModBlocks.CHARGER;
+		RegistryManager.ember_pipe = ModBlocks.PIPE;
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
@@ -53,6 +55,7 @@ public class ModEvents {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEmitter.class, new TESREmitter());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEjector.class, new TESREjector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileCharger.class, new TESRCharger());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileVPipe.class, new TESRVPipe());
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)

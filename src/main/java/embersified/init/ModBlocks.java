@@ -1,6 +1,7 @@
 package embersified.init;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import embersified.blocks.*;
 import teamroots.embers.block.IBlock;
@@ -17,9 +18,10 @@ public class ModBlocks {
 	public static final Block EJECTOR = new BlockEjector().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(0.6f);
 	public static final Block FUNNEL = new BlockFunnel().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f);
 	public static final Block CHARGER = new BlockChargerE().setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f);
+	public static final Block PIPE = new BlockVPipe(Material.IRON,"ember_pipe",true).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f);
 
 	private static final Block[] BLOCK_ARRAY = new Block[] {
-			EMITTER, RECEPTOR, EJECTOR, FUNNEL, CHARGER
+			EMITTER, RECEPTOR, EJECTOR, FUNNEL, CHARGER, PIPE
 	};
 
 	public static final Block[] getArray() {
