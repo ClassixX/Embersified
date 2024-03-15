@@ -20,6 +20,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import embersified.blocks.BlockEmitter;
 import embersified.init.ModConfig.Options;
+import embersified.power.SpecialEmberCapability;
 import teamroots.embers.api.capabilities.EmbersCapabilities;
 import teamroots.embers.api.power.IEmberCapability;
 import teamroots.embers.api.power.IEmberPacketReceiver;
@@ -41,7 +42,7 @@ public class TileFunnel extends TileEntity implements ITileEntityBase, ITickable
 	public static final int TRANSFER_RATE = 100;
 	public static final int MAX_MANA = 1000000;
 	private static final int MAX_MANA_DILLUTED = 10000; 
-	public IEmberCapability embersCap = new DefaultEmberCapability();
+	public IEmberCapability embersCap= new SpecialEmberCapability();
 	Random random = new Random();
 	long ticksExisted = 0;
 
@@ -133,6 +134,9 @@ public class TileFunnel extends TileEntity implements ITileEntityBase, ITickable
 					}
 				}
 			}
+		}
+		if (Options.enableOverflowBuffer) {
+			embersCap.onContentsChanged();
 		}
 	}
 
