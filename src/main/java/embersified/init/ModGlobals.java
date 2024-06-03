@@ -12,7 +12,7 @@ public class ModGlobals {
 
 	public static final String MODID = "embersifiedextended";
 	public static final String NAME = "EmbersifiedExtended";
-	public static final String VERSION = "1.2.1";
+	public static final String VERSION = "1.2.2";
 	public static final String DEPENDENCIES = "after:embers@[1.8,);";
 	public static final String CONFIG_FILE = NAME + ".cfg";
 	

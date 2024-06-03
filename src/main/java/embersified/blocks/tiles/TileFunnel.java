@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.common.Loader;
 import embersified.blocks.BlockEmitter;
 import embersified.init.ModConfig.Options;
 import embersified.power.SpecialEmberCapability;
@@ -43,6 +44,7 @@ public class TileFunnel extends TileEntity implements ITileEntityBase, ITickable
 	public static final int MAX_MANA = 1000000;
 	private static final int MAX_MANA_DILLUTED = 10000; 
 	public IEmberCapability embersCap= new SpecialEmberCapability();
+	public static final boolean BOTANIA_LOADED = Loader.isModLoaded("botania");
 	Random random = new Random();
 	long ticksExisted = 0;
 
@@ -122,15 +124,17 @@ public class TileFunnel extends TileEntity implements ITileEntityBase, ITickable
 					}
 				}
 			}
-			else if(attachedTile instanceof IManaPool && Options.embersCanGenerateMana) {
-				IManaPool pool = (IManaPool) attachedTile;
-				if(!pool.isFull()) {
-					int manaCap = world.getBlockState(attachedTile.getPos()).getValue(BotaniaStateProps.POOL_VARIANT) == PoolVariant.DILUTED ? MAX_MANA_DILLUTED : MAX_MANA;
-					double ToAdd = Math.min(TRANSFER_RATE * Options.manaMultiplier, manaCap - pool.getCurrentMana());
-					pool.recieveMana((int)ToAdd);
-					embersCap.removeAmount(ToAdd / Options.manaMultiplier, true);
-					if (!getWorld().isRemote) {
-						attachedTile.markDirty();
+			else if(BOTANIA_LOADED) {
+				if(attachedTile instanceof IManaPool && Options.embersCanGenerateMana) {
+					IManaPool pool = (IManaPool) attachedTile;
+					if(!pool.isFull()) {
+						int manaCap = world.getBlockState(attachedTile.getPos()).getValue(BotaniaStateProps.POOL_VARIANT) == PoolVariant.DILUTED ? MAX_MANA_DILLUTED : MAX_MANA;
+						double ToAdd = Math.min(TRANSFER_RATE * Options.manaMultiplier, manaCap - pool.getCurrentMana());
+						pool.recieveMana((int)ToAdd);
+						embersCap.removeAmount(ToAdd / Options.manaMultiplier, true);
+						if (!getWorld().isRemote) {
+							attachedTile.markDirty();
+						}
 					}
 				}
 			}
